@@ -18,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'App\Http\Controllers\ClientController@home');
+Route::get('/shop', 'App\Http\Controllers\ClientController@shop');
+Route::get('/panier', 'App\Http\Controllers\ClientController@cart');
+Route::get('/client_login', 'App\Http\Controllers\ClientController@client_login');
+Route::get('/signup', 'App\Http\Controllers\ClientController@signup');
+Route::get('/paiement', 'App\Http\Controllers\ClientController@checkout');
+
+
+
+
+
