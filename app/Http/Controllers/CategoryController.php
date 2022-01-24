@@ -28,4 +28,23 @@ class CategoryController extends Controller
         $categories = Category::get();
         return view('admin.categories')->with('categories', $categories);
     }
+
+    public function edit($id) {
+        $category = Category::find($id);
+
+        return view('admin.editcategory')->with('category', $category);
+    }
+
+    public function editcategory(Request $request) {
+
+        $this->validate($request, ['category_name' => 'required']);
+
+        $category = Category::find($request->input('id'));
+
+        $category->category_name = $request->input('category_name');
+
+        $category->update();
+
+        return redirect('/categories')->with('status', 'La catégorie '.$category->category_name.' a bien été modifiée');
+    }
 }
