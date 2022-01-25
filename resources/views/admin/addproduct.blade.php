@@ -10,6 +10,22 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Ajouter le produit</h4>
+
+                  @if (Session::has('status'))
+                         <div class="alert alert-success">
+                             {{Session::get('status')}}
+                         </div>
+                    @endif
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                       {!! Form::open(['action' => 'App\Http\Controllers\ProductController@saveproduct', 'method' => 'POST', 'class' => 'cmxform', 'id' => 'commentForm']) !!}
                       {{ csrf_field() }}
                       <div class="form-group">
@@ -22,7 +38,7 @@
                       </div>
                       <div class="form-group">
                         {!! Form::label('', 'Catégorie du produit', ['for' => 'cname']) !!}
-                        {{-- {!! Form::select('product_category', $categories, null, ['placeholder' => 'Séléctionner la catégorie' 'class' => 'form-control']) !!} --}}
+                        {!! Form::select('product_category', $categories, null, ['placeholder' => 'Selectionner la catégorie', 'class' => 'form-control']) !!}
                       </div>
                       <div class="form-group">
                         {!! Form::label('', 'Image du produit', ['for' => 'cname']) !!}

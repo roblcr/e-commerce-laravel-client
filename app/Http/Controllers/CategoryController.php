@@ -12,7 +12,7 @@ class CategoryController extends Controller
     }
 
     public function savecategory(Request $request) {
-        $this->validate($request, ['category_name' => 'required']);
+        $this->validate($request, ['category_name' => 'required|unique:categories']);
 
         $category = new Category();
 
@@ -37,7 +37,7 @@ class CategoryController extends Controller
 
     public function editcategory(Request $request) {
 
-        $this->validate($request, ['category_name' => 'required']);
+        $this->validate($request, ['category_name' => 'required|unique:categories']);
 
         $category = Category::find($request->input('id'));
 
