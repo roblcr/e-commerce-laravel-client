@@ -47,4 +47,13 @@ class CategoryController extends Controller
 
         return redirect('/categories')->with('status', 'La catégorie '.$category->category_name.' a bien été modifiée');
     }
+
+    public function delete($id) {
+
+        $category = Category::find($id);
+
+        $category->delete();
+
+        return redirect('/categories')->with('status', 'La catégorie '.$category->category_name.' a bien été suprimée');
+    }
 }

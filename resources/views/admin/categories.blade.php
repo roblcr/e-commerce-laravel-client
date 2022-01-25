@@ -3,6 +3,8 @@
 @section('title')
     Catégories
 @endsection
+{{{ Form::hidden('', $increment = 1) }}}
+
 
 @section('contenu')
 
@@ -30,16 +32,17 @@
                   <tbody>
                       @foreach ($categories as $category)
                         <tr>
-                                                <td>1</td>
+                                                <td>{{$increment}}</td>
                                                 <td>{{$category->category_name}}</td>
                                                 {{-- <td>
                                                 <label class="badge badge-info">On hold</label>
                                                 </td> --}}
                                                 <td>
                                                 <button class="btn btn-outline-primary" onclick="window.location ='{{url('/edit_category/'.$category->id)}}'">Edit</button>
-                                                <button class="btn btn-outline-danger">Delete</button>
+                                                <a class="btn btn-outline-danger" href="{{url('/delete_category/'.$category->id)}}" id="delete">Delete</a></
                                                 </td>
                                             </tr>
+                                            {{{ Form::hidden('', $increment=$increment + 1) }}}
                       @endforeach
 
                   </tbody>

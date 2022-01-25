@@ -33,6 +33,7 @@ Route::post('/savecategory', 'App\Http\Controllers\CategoryController@savecatego
 Route::get('/categories', 'App\Http\Controllers\CategoryController@categories');
 Route::get('/edit_category/{id}', 'App\Http\Controllers\CategoryController@edit');
 Route::post('/editcategory', 'App\Http\Controllers\CategoryController@editcategory');
+Route::get('/delete_category/{id}', 'App\Http\Controllers\CategoryController@delete');
 
 Route::get('/ajouterproduit', 'App\Http\Controllers\ProductController@addproduct');
 Route::post('/saveproduct', 'App\Http\Controllers\ProductController@saveproduct');
