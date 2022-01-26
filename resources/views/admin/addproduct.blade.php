@@ -26,7 +26,7 @@
                         </div>
                     @endif
 
-                      {!! Form::open(['action' => 'App\Http\Controllers\ProductController@saveproduct', 'method' => 'POST', 'class' => 'cmxform', 'id' => 'commentForm']) !!}
+                      {!! Form::open(['action' => 'App\Http\Controllers\ProductController@saveproduct', 'method' => 'POST', 'class' => 'cmxform', 'id' => 'commentForm', 'enctype' => 'multipart/form-data']) !!}
                       {{ csrf_field() }}
                       <div class="form-group">
                           {!! Form::label('', 'Nom du produit', ['for' => 'cname']) !!}
