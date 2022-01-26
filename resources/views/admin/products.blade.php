@@ -3,6 +3,8 @@
 @section('title')
     Produits
 @endsection
+{{{ Form::hidden('', $increment = 1) }}}
+
 
 @section('contenu')
 
@@ -11,6 +13,11 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Produits</h4>
+          @if (Session::has('status'))
+                         <div class="alert alert-success">
+                             {{Session::get('status')}}
+                         </div>
+                    @endif
           <div class="row">
             <div class="col-12">
               <div class="table-responsive">
@@ -27,20 +34,29 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2012/08/03</td>
-                        <td>2012/08/03</td>
-                        <td>2012/08/03</td>
-                        <td>2012/08/03</td>
-                        <td>
-                          <label class="badge badge-info">On hold</label>
-                        </td>
-                        <td>
-                          <button class="btn btn-outline-primary">Edit</button>
-                          <button class="btn btn-outline-danger">Delete</button>
-                        </td>
-                    </tr>
+                      @foreach ($produits as $produit)
+                        <tr>
+                            <td>{{$increment}}</td>
+                            <td><img src="storage/product_images/{{$produit->product_image}}" alt=""></td>
+                            <td>{{$produit->product_name}}</td>
+                            <td>{{$produit->product_category}}</td>
+                            <td>{{$produit->product_price}}</td>
+                            <td>
+                                @if ($produit->status == 1)
+                                    <label class="badge badge-success">Activé</label>
+                                @else
+                                    <label class="badge badge-danger">Desactivé</label>
+                                @endif
+
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" onclick="window.location ='{{url('/edit_product/'.$produit->id)}}'">Edit</button>
+                            <button class="btn btn-outline-danger">Delete</button>
+                            </td>
+                        </tr>
+                        {{{ Form::hidden('', $increment=$increment + 1) }}}
+                      @endforeach
+
                   </tbody>
                 </table>
               </div>
