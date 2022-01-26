@@ -98,4 +98,16 @@ class ProductController extends Controller
 
             return redirect('/products')->with('status', 'le produit ' . $product->product_name . ' a été modifié avec succés');
     }
+
+    public function delete($id) {
+        $product = Product::find($id);
+
+        if($product->product_image != 'noimage.jpg'){
+            Storage::delete('public/product_images/' .$product->product_image);
+        }
+
+        $product->delete();
+
+        return redirect('/products')->with('status', 'Le produit '.$product->product_name.' a bien été suprimée');
+    }
 }

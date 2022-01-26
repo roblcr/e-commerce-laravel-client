@@ -51,7 +51,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-outline-primary" onclick="window.location ='{{url('/edit_product/'.$produit->id)}}'">Edit</button>
-                            <button class="btn btn-outline-danger">Delete</button>
+                                <a class="btn btn-outline-danger" href="{{url('/delete_product/'.$produit->id)}}" id="delete">Delete</a>
                             </td>
                         </tr>
                         {{{ Form::hidden('', $increment=$increment + 1) }}}

@@ -40,6 +40,7 @@ Route::post('/saveproduct', 'App\Http\Controllers\ProductController@saveproduct'
 Route::get('/products', 'App\Http\Controllers\ProductController@products');
 Route::get('/edit_product/{id}', 'App\Http\Controllers\ProductController@edit');
 Route::post('/editproduct', 'App\Http\Controllers\ProductController@editproduct');
+Route::get('/delete_product/{id}', 'App\Http\Controllers\ProductController@delete');
 
 Route::get('/ajouterslider', 'App\Http\Controllers\SliderController@addslider');
 Route::post('/saveslider', 'App\Http\Controllers\SliderController@saveslider');
