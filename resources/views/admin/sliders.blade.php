@@ -51,9 +51,9 @@
                             <button class="btn btn-outline-primary" onclick="window.location ='{{url('/edit_slider/'.$slider->id)}}'">Edit</button>
                             <a class="btn btn-outline-danger" href="{{url('/delete_slider/'.$slider->id)}}" id="delete">Delete</a>
                             @if ($slider->status == 1)
-                                <button class="btn btn-outline-warning" onclick="window.location ='{{url('/deactivate_product/'.$slider->id)}}'">Désactiver</button>
+                                <button class="btn btn-outline-warning" onclick="window.location ='{{url('/deactivate_slider/'.$slider->id)}}'">Désactiver</button>
                             @else
-                                <button class="btn btn-outline-success" onclick="window.location ='{{url('/activate_product/'.$slider->id)}}'">Activer</button>
+                                <button class="btn btn-outline-success" onclick="window.location ='{{url('/activate_slider/'.$slider->id)}}'">Activer</button>
                             @endif
                         </td>
                     </tr>

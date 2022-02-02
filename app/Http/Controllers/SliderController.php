@@ -90,4 +90,39 @@ class SliderController extends Controller
 
         return redirect('/sliders')->with('status', 'le slider a été modifié avec succés');
     }
+
+    public function delete($id)
+    {
+        $slider = Slider::find($id);
+
+        if($slider->slider_image != 'noimage.jpg'){
+            Storage::delete('public/slider_images/' .$slider->slider_image);
+        }
+
+        $slider->delete();
+
+        return redirect('/sliders')->with('status', 'Le slider a bien été suprimée');
+    }
+
+    public function activate($id)
+    {
+        $slider = Slider::find($id);
+
+        $slider->status = 1;
+
+        $slider->update();
+
+        return redirect('/sliders')->with('status', 'Le slider a bien été activée');
+    }
+
+    public function deactivate($id)
+    {
+        $slider = Slider::find($id);
+
+        $slider->status = 0;
+
+        $slider->update();
+
+        return redirect('/sliders')->with('status', 'Le slider a bien été désactivée');
+    }
 }

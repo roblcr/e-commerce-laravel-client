@@ -49,6 +49,9 @@ Route::post('/saveslider', 'App\Http\Controllers\SliderController@saveslider');
 Route::get('/sliders', 'App\Http\Controllers\SliderController@sliders');
 Route::get('/edit_slider/{id}', 'App\Http\Controllers\SliderController@edit');
 Route::post('/editslider', 'App\Http\Controllers\SliderController@editslider');
+Route::get('/delete_slider/{id}', 'App\Http\Controllers\SliderController@delete');
+Route::get('/activate_slider/{id}', 'App\Http\Controllers\SliderController@activate');
+Route::get('/deactivate_slider/{id}', 'App\Http\Controllers\SliderController@deactivate');
 
 
 
