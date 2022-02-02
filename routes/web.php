@@ -41,10 +41,15 @@ Route::get('/products', 'App\Http\Controllers\ProductController@products');
 Route::get('/edit_product/{id}', 'App\Http\Controllers\ProductController@edit');
 Route::post('/editproduct', 'App\Http\Controllers\ProductController@editproduct');
 Route::get('/delete_product/{id}', 'App\Http\Controllers\ProductController@delete');
+Route::get('/activate_product/{id}', 'App\Http\Controllers\ProductController@activate');
+Route::get('/deactivate_product/{id}', 'App\Http\Controllers\ProductController@deactivate');
 
 Route::get('/ajouterslider', 'App\Http\Controllers\SliderController@addslider');
 Route::post('/saveslider', 'App\Http\Controllers\SliderController@saveslider');
 Route::get('/sliders', 'App\Http\Controllers\SliderController@sliders');
+Route::get('/edit_slider/{id}', 'App\Http\Controllers\SliderController@edit');
+Route::post('/editslider', 'App\Http\Controllers\SliderController@editslider');
+
 
 
 

@@ -110,4 +110,24 @@ class ProductController extends Controller
 
         return redirect('/products')->with('status', 'Le produit '.$product->product_name.' a bien été suprimée');
     }
+
+    public function activate($id){
+        $product = Product::find($id);
+
+        $product->status = 1;
+
+        $product->update();
+
+        return redirect('/products')->with('status', 'Le produit '.$product->product_name.' a bien été activée');
+    }
+
+    public function deactivate($id){
+        $product = Product::find($id);
+
+        $product->status = 0;
+
+        $product->update();
+
+        return redirect('/products')->with('status', 'Le produit '.$product->product_name.' a bien été désactivée');
+    }
 }
