@@ -23,6 +23,7 @@ Route::get('/panier', 'App\Http\Controllers\ClientController@cart');
 Route::get('/client_login', 'App\Http\Controllers\ClientController@client_login');
 Route::get('/signup', 'App\Http\Controllers\ClientController@signup');
 Route::get('/paiement', 'App\Http\Controllers\ClientController@checkout');
+Route::get('/select_categories/{name}', 'App\Http\Controllers\ClientController@select_category');
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@dashboard');
 Route::get('/order', 'App\Http\Controllers\AdminController@order');
