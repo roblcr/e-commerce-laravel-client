@@ -24,17 +24,23 @@
                       <form action="{{url('/pay')}}" id="checkout-form" class="billing-form" method="POST">
                           {{ csrf_field() }}
                 <h3 class="mb-4 billing-heading">Billing Details</h3>
+                @if (Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{Session::get('error')}}
+                        {{Session::put('error', null)}}
+                    </div>
+                @endif
                 <div class="row align-items-end">
                     <div class="col-md-12">
                   <div class="form-group">
                       <label for="firstname">Full Name</label>
-                    <input type="text" class="form-control" placeholder="name">
+                    <input type="text" class="form-control" name="name">
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                       <label for="lastname">Address</label>
-                    <input type="text" class="form-control" placeholder="address">
+                    <input type="text" class="form-control" name="address">
                   </div>
               </div>
                   <div class="col-md-12">

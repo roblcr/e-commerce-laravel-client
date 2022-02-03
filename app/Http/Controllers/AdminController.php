@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -10,7 +11,16 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function order() {
-        return view('admin.order');
+    public function orders() {
+
+        $orders = Order::get();
+
+        $orders->transform(function($order, $key){
+            $order->cart = unserialize($order->cart);
+
+            return $order;
+        });
+
+        return view('admin.order')->with('orders', $orders);
     }
 }

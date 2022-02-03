@@ -31,7 +31,7 @@ Route::post('/pay', 'App\Http\Controllers\ClientController@pay');
 
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@dashboard');
-Route::get('/order', 'App\Http\Controllers\AdminController@order');
+Route::get('/order', 'App\Http\Controllers\AdminController@orders');
 
 
 Route::get('/ajoutercategorie', 'App\Http\Controllers\CategoryController@addcategory');

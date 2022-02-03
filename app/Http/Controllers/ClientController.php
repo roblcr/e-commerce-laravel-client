@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Cart;
+use App\Models\Order;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Stripe\Charge;
@@ -118,6 +119,15 @@ class ClientController extends Controller
                 "source" => $request->input('stripeToken'), // obtainded with Stripe.js
                 "description" => "Test Charge"
             ));
+
+            $orders = new Order();
+
+            $orders->name = $request->input('name');
+            $orders->address = $request->input('address');
+            $orders->cart = serialize($cart);
+            $orders->payment_id = $charge->id;
+
+            $orders->save();
 
 
 

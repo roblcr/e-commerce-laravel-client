@@ -3,7 +3,7 @@
 @section('title')
     Commandes
 @endsection
-
+{{{ Form::hidden('', $increment = 1) }}}
 @section('contenu')
 
 
@@ -27,16 +27,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2012/08/03</td>
-                        <td>2012/08/03</td>
-                        <td>2012/08/03</td>
-                        <td>2012/08/03</td>
-                        <td>
-                          <button class="btn btn-outline-primary">View</button>
-                        </td>
-                    </tr>
+
+                    @foreach ($orders as $order)
+                        <tr>
+                            <td>{{$increment}}</td>
+                            <td>{{$order->name}}</td>
+                            <td>{{$order->address}}</td>
+                            <td>
+                                @foreach ($order->cart->items as $item)
+                                   {{$item['product_name'] . ' , '}}
+                                @endforeach
+
+                            </td>
+                            <td>{{$order->payment_id}}</td>
+                            <td>
+                                <button class="btn btn-outline-primary">View</button>
+                            </td>
+                        </tr>
+                        {{{ Form::hidden('', $increment = $increment + 1) }}}
+                    @endforeach
+
                   </tbody>
                 </table>
               </div>
