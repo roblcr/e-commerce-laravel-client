@@ -6,7 +6,7 @@
 
 {{--start content--}}
     @section('contenu')
-    <div class="hero-wrap hero-bread" style="background-image: url('frontend/images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread" style=" background-image: url('{{asset('frontend/images/bg_1.jpg')}}');">
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
@@ -50,7 +50,7 @@
                                       <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                           <span><i class="ion-ios-menu"></i></span>
                                       </a>
-                                      <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                      <a href="add_cart/{{$product->id}}" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                           <span><i class="ion-ios-cart"></i></span>
                                       </a>
                                       <a href="#" class="heart d-flex justify-content-center align-items-center ">

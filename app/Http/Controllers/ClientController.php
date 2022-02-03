@@ -6,6 +6,9 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use App\Cart;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
@@ -31,8 +34,28 @@ class ClientController extends Controller
         return view('client.shop')->with('products', $products)->with('categories', $categories);
     }
 
+    public function add_cart($id)
+    {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart')? Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $id);
+        Session::put('cart', $cart);
+
+        //dd(Session::get('cart'));
+        return Redirect::to('/shop');
+    }
+
     public function cart() {
-        return view('client.cart');
+
+        if(!Session::has('cart')){
+            return view('client.cart');
+        }
+
+        $oldCart = Session::has('cart')? Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        return view('client.cart', ['products' => $cart->items]);
+
     }
 
     public function client_login() {
