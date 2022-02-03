@@ -25,6 +25,8 @@ Route::get('/signup', 'App\Http\Controllers\ClientController@signup');
 Route::get('/paiement', 'App\Http\Controllers\ClientController@checkout');
 Route::get('/select_categories/{name}', 'App\Http\Controllers\ClientController@select_category');
 Route::get('/add_cart/{id}', 'App\Http\Controllers\ClientController@add_cart');
+Route::post('/edit_qty/{id}', 'App\Http\Controllers\ClientController@edit_cart');
+Route::get('/remove_product/{id}', 'App\Http\Controllers\ClientController@remove_product');
 
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@dashboard');

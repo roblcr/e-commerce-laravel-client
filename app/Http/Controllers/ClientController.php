@@ -58,6 +58,35 @@ class ClientController extends Controller
 
     }
 
+    public function edit_cart($id, Request $request)
+    {
+        //print('the product id is '.$request->id.' And the product qty is '.$request->quantity);
+        $oldCart = Session::has('cart')? Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart->updateQty($id, $request->quantity);
+        Session::put('cart', $cart);
+
+        //dd(Session::get('cart'));
+        return redirect::to('/cart');
+    }
+
+    public function remove_product($id)
+    {
+        $oldCart = Session::has('cart')? Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
+
+        if(count($cart->items) > 0){
+            Session::put('cart', $cart);
+        }
+        else{
+            Session::forget('cart');
+        }
+
+        //dd(Session::get('cart'));
+        return redirect::to('/cart');
+    }
+
     public function client_login() {
         return view('client.login');
     }

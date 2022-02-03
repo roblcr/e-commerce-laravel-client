@@ -34,10 +34,12 @@ Panier
                                 <th>Total</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        @if (Session::has('cart'))
+                              <tbody>
+
                             @foreach ($products as $product)
                             <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                                <td class="product-remove"><a href="{{URL::to('/remove_product/'.$product['product_id'])}}"><span class="ion-ios-close"></span></a></td>
 
                                 <td class="image-prod">
                                     <div class="img" style="background-image: url(storage/product_images/{{$product['product_image']}});">
@@ -50,16 +52,19 @@ Panier
                                 </td>
 
                                 <td class="price">{{$product['product_price']}}€</td>
-                                <form action="">
+                                <form action="{{URL::to('/edit_qty/'.$product['product_id'])}}" method="POST">
+                                    {{ csrf_field() }}
                                     <td class="quantity">
                                         <div class="input-group mb-3">
                                             <input type="number" name="quantity"
                                                 class="quantity form-control input-number" value="{{$product['qty']}}" min="1">
                                         </div>
+                                        <input type="submit" value="Modifier" class="btn btn-success">
+                                    </td>
                                 </form>
 
 
-                                </td>
+
 
                                 <td class="total">{{$product['product_price']*$product['qty']}}</td>
                             </tr><!-- END TR-->
@@ -67,6 +72,8 @@ Panier
 
 
                         </tbody>
+                        @endif
+
                     </table>
                 </div>
             </div>
