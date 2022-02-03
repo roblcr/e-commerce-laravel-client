@@ -21,85 +21,57 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-7 ftco-animate">
-                      <form action="#" class="billing-form">
-                          <h3 class="mb-4 billing-heading">Billing Details</h3>
+                      <form action="{{url('/pay')}}" id="checkout-form" class="billing-form" method="POST">
+                          {{ csrf_field() }}
+                <h3 class="mb-4 billing-heading">Billing Details</h3>
                 <div class="row align-items-end">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                   <div class="form-group">
-                      <label for="firstname">Firt Name</label>
-                    <input type="text" class="form-control" placeholder="">
+                      <label for="firstname">Full Name</label>
+                    <input type="text" class="form-control" placeholder="name">
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
-                      <label for="lastname">Last Name</label>
-                    <input type="text" class="form-control" placeholder="">
+                      <label for="lastname">Address</label>
+                    <input type="text" class="form-control" placeholder="address">
                   </div>
               </div>
-              <div class="w-100"></div>
                   <div class="col-md-12">
                       <div class="form-group">
-                          <label for="country">State / Country</label>
-                          <div class="select-wrap">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                            <option value="">France</option>
-                          <option value="">Italy</option>
-                          <option value="">Philippines</option>
-                          <option value="">South Korea</option>
-                          <option value="">Hongkong</option>
-                          <option value="">Japan</option>
-                        </select>
-                      </div>
+                          <label for="lastname">Name on Card</label>
+                          <input type="text" class="form-control" id="card-name" name="card_name">
                       </div>
                   </div>
-                  <div class="w-100"></div>
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                       <div class="form-group">
-                      <label for="streetaddress">Street Address</label>
-                    <input type="text" class="form-control" placeholder="House number and street name">
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Appartment, suite, unit etc: (optional)">
-                  </div>
-                  </div>
-                  <div class="w-100"></div>
-                  <div class="col-md-6">
-                      <div class="form-group">
-                      <label for="towncity">Town / City</label>
-                    <input type="text" class="form-control" placeholder="">
+                      <label for="lastname">Number</label>
+                    <input type="text" class="form-control" id="card-number">
                   </div>
                   </div>
                   <div class="col-md-6">
                       <div class="form-group">
-                          <label for="postcodezip">Postcode / ZIP *</label>
-                    <input type="text" class="form-control" placeholder="">
+                        <label for="lastname">Expiration Month</label>
+                        <input type="text" id="card-expiry-month" class="form-control">
+                    </div>
                   </div>
-                  </div>
-                  <div class="w-100"></div>
                   <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="lastname">Expiration Year</label>
+                    <input type="text" class="form-control" id="card-expiry-year">
+                  </div>
+                  </div>
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="lastname">CVC</label>
+                    <input type="text" class="form-control" id="card-cvc">
+                  </div>
+                  </div>
+                  <div class="col-md-12">
                   <div class="form-group">
-                      <label for="phone">Phone</label>
-                    <input type="text" class="form-control" placeholder="">
+                    <input type="submit" class="btn btn-primary" value="Payer">
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                      <label for="emailaddress">Email Address</label>
-                    <input type="text" class="form-control" placeholder="">
-                  </div>
-              </div>
-              <div class="w-100"></div>
-              <div class="col-md-12">
-                  <div class="form-group mt-4">
-                                      <div class="radio">
-                                        <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-                                        <label><input type="radio" name="optradio"> Ship to different address</label>
-                                      </div>
-                                  </div>
-              </div>
               </div>
             </form><!-- END -->
                   </div>
@@ -123,7 +95,7 @@
                               <hr>
                               <p class="d-flex total-price">
                                   <span>Total</span>
-                                  <span>$17.60</span>
+                                  <span>{{Session::get('cart')->totalPrice}}</span>
                               </p>
                               </div>
                 </div>
@@ -173,6 +145,8 @@
 
 
 @section('scripts')
+<script src="https://js.stripe.com/v2/"></script>
+<script src="src/js/checkout.js"></script>
 <script>
 		$(document).ready(function(){
 

@@ -22,11 +22,12 @@ Route::get('/shop', 'App\Http\Controllers\ClientController@shop');
 Route::get('/cart', 'App\Http\Controllers\ClientController@cart');
 Route::get('/client_login', 'App\Http\Controllers\ClientController@client_login');
 Route::get('/signup', 'App\Http\Controllers\ClientController@signup');
-Route::get('/paiement', 'App\Http\Controllers\ClientController@checkout');
+Route::get('/checkout', 'App\Http\Controllers\ClientController@checkout');
 Route::get('/select_categories/{name}', 'App\Http\Controllers\ClientController@select_category');
 Route::get('/add_cart/{id}', 'App\Http\Controllers\ClientController@add_cart');
 Route::post('/edit_qty/{id}', 'App\Http\Controllers\ClientController@edit_cart');
 Route::get('/remove_product/{id}', 'App\Http\Controllers\ClientController@remove_product');
+Route::post('/pay', 'App\Http\Controllers\ClientController@pay');
 
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@dashboard');

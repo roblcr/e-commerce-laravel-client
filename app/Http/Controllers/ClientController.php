@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Cart;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class ClientController extends Controller
 {
@@ -87,6 +89,48 @@ class ClientController extends Controller
         return redirect::to('/cart');
     }
 
+    public function checkout() {
+
+        if(!Session::has('cart')){
+            return view('client.cart');
+        }
+
+        return view('client.checkout');
+    }
+
+    public function pay(Request $request)
+    {
+
+        if(!Session::has('cart')){
+            return view('client.cart');
+        }
+
+        $oldCart = Session::has('cart')? Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+
+        Stripe::setApiKey('sk_test_51KP4qMJtuOmbTkqnGzn7E4ZhEHcxOIQKV4xXTYfVEVtGvLMXrYlNkCvLoxzg610jtiuLr8ue0AfjVmFAQYvyT5hb00Riw31OkO');
+
+        try{
+
+            $charge = Charge::create(array(
+                "amount" => $cart->totalPrice * 100,
+                "currency" => "eur",
+                "source" => $request->input('stripeToken'), // obtainded with Stripe.js
+                "description" => "Test Charge"
+            ));
+
+
+
+        } catch(\Exception $e){
+            Session::put('error', $e->getMessage());
+            return redirect::to('/checkout');
+        }
+
+        Session::forget('cart');
+        // Session::put('success', 'Purchase accomplished successfully !');
+        return redirect::to('/cart')->with('status', 'Achat accompli avec succès');
+    }
+
     public function client_login() {
         return view('client.login');
     }
@@ -95,7 +139,5 @@ class ClientController extends Controller
         return view('client.signup');
     }
 
-    public function checkout() {
-        return view('client.checkout');
-    }
+
 }

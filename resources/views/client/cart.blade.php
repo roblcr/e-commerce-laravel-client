@@ -72,6 +72,16 @@ Panier
 
 
                         </tbody>
+
+
+                        @else
+                            @if (Session::has('status'))
+                            <div class="alert alert-success">
+                                {{Session::get('status')}}
+                            </div>
+                            @endif
+
+
                         @endif
 
                     </table>
@@ -134,7 +144,7 @@ Panier
                         <span>$17.60</span>
                     </p>
                 </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                <p><a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
             </div>
         </div>
     </div>
