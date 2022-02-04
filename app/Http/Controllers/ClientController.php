@@ -7,9 +7,11 @@ use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Cart;
+use App\Mail\SendMail;
 use App\Models\Order;
 use App\Models\Client;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Stripe\Charge;
@@ -95,6 +97,12 @@ class ClientController extends Controller
 
     public function checkout() {
 
+
+        if(!Session::has('client')){
+            return view('client.login');
+        }
+
+
         if(!Session::has('cart')){
             return view('client.cart');
         }
@@ -123,16 +131,28 @@ class ClientController extends Controller
                 "description" => "Test Charge"
             ));
 
-            $orders = new Order();
+            $order = new Order();
 
-            $orders->name = $request->input('name');
-            $orders->address = $request->input('address');
-            $orders->cart = serialize($cart);
-            $orders->payment_id = $charge->id;
+            $order->name = $request->input('name');
+            $order->address = $request->input('address');
+            $order->cart = serialize($cart);
+            $order->payment_id = $charge->id;
 
-            $orders->save();
+            $order->save();
+
+            $orders = Order::where('payment_id', $charge->id)->get();
+
+                $orders->transform(function($order, $key){
+                $order->cart = unserialize($order->cart);
+
+                return $order;
+
+            });
 
 
+            $email = Session::get('client')->email;
+
+                Mail::to($email)->send(new SendMail($orders));
 
         } catch(\Exception $e){
             Session::put('error', $e->getMessage());
