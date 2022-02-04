@@ -30,6 +30,9 @@ Route::get('/remove_product/{id}', 'App\Http\Controllers\ClientController@remove
 Route::post('/pay', 'App\Http\Controllers\ClientController@pay');
 
 
+Route::get('/view_pdf/{id}', 'App\Http\Controllers\PdfController@view_pdf');
+
+
 Route::get('/admin', 'App\Http\Controllers\AdminController@dashboard');
 Route::get('/order', 'App\Http\Controllers\AdminController@orders');
 
