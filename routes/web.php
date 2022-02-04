@@ -28,6 +28,8 @@ Route::get('/add_cart/{id}', 'App\Http\Controllers\ClientController@add_cart');
 Route::post('/edit_qty/{id}', 'App\Http\Controllers\ClientController@edit_cart');
 Route::get('/remove_product/{id}', 'App\Http\Controllers\ClientController@remove_product');
 Route::post('/pay', 'App\Http\Controllers\ClientController@pay');
+Route::post('/account_creation', 'App\Http\Controllers\ClientController@account_creation');
+Route::post('/account_access', 'App\Http\Controllers\ClientController@account_access');
 
 
 Route::get('/view_pdf/{id}', 'App\Http\Controllers\PdfController@view_pdf');

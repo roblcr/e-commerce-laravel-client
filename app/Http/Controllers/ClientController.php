@@ -8,6 +8,8 @@ use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Models\Order;
+use App\Models\Client;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Stripe\Charge;
@@ -21,6 +23,7 @@ class ClientController extends Controller
 
         return view('client.home')->with('sliders', $sliders)->with('products', $products);
     }
+
 
     public function shop() {
 
@@ -139,6 +142,46 @@ class ClientController extends Controller
         Session::forget('cart');
         // Session::put('success', 'Purchase accomplished successfully !');
         return redirect::to('/cart')->with('status', 'Achat accompli avec succès');
+    }
+
+    public function account_creation(Request $request)
+    {
+        $this->validate($request, ['email' => 'email|required|unique:clients',
+                                    'password' => 'required|min:4']);
+
+        $client = new Client();
+        $client->email = $request->input('email');
+        $client->password = bcrypt($request->input('password'));
+
+        $client->save();
+
+        return back()->with('status', 'Votre compte a été créée avec succès');
+    }
+
+    public function account_access(Request $request)
+    {
+        $this->validate($request, ['email' => 'email|required',
+        'password' => 'required']);
+
+        $client = Client::where('email', $request->input('email'))->first();
+
+        if ($client) {
+            # code...
+            if (Hash::check($request->input('password'), $client->password)) {
+                # code...
+                Session::put('client', $client);
+                return redirect('/shop');
+            } else {
+                # code...
+                return back()->with('status', 'Mauvais mot de passe ou mauvaise adresse mail');
+            }
+
+        } else {
+            # code...
+            return back()->with('status', 'Vous n\'avez pas de compte');
+        }
+
+
     }
 
     public function client_login() {

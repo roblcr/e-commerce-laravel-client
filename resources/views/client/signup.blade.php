@@ -1,77 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-  	<title>Login 03</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+<head>
+    <title>Login V3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="frontend/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="frontend/css/util.css">
+    <link rel="stylesheet" type="text/css" href="frontend/css/main.css">
+    <!--===============================================================================================-->
+</head>
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
 
-	<link rel="stylesheet" href="css/style.login.css">
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('frontend/images/bg-01.jpg');">
+            <div class="wrap-login100">
+                    @if (Session::has('status'))
+                    <div class="alert alert-success">
+                        {{Session::get('status')}}
+                    </div>
+                    @endif
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                <form class="login100-form validate-form" action="{{url('/account_creation')}}" method="POST">
+                    {{ csrf_field() }}
+                    <a href="{{URL::to('/')}}">
+                        <span class="login100-form-logo">
+                            <i class="zmdi zmdi-landscape"></i>
+                        </span>
+                    </a>
 
-	</head>
-	<body>
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Signup</h2>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-7 col-lg-5">
-					<div class="login-wrap p-4 p-md-5">
-		      	<div class="d-flex">
-		      		<div class="w-100">
-		      			<h3 class="mb-4">Sign In</h3>
-		      		</div>
-							<div class="w-100">
-								<p class="social-media d-flex justify-content-end">
-									<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
-									<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
-								</p>
-							</div>
-		      	</div>
-						<form action="#" class="login-form">
-		      		<div class="form-group">
-		      			<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span></div>
-		      			<input type="text" class="form-control rounded-left" placeholder="Username" required>
-		      		</div>
-	            <div class="form-group">
-	            	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>
-	              <input type="password" class="form-control rounded-left" placeholder="Password" required>
-	            </div>
-	            <div class="form-group d-flex align-items-center">
-	            	<div class="w-100">
-	            		<label class="checkbox-wrap checkbox-primary mb-0">Save Password
-									  <input type="checkbox" checked>
-									  <span class="checkmark"></span>
-									</label>
-								</div>
-								<div class="w-100 d-flex justify-content-end">
-		            	<button type="submit" class="btn btn-primary rounded submit">Login</button>
-	            	</div>
-	            </div>
-	            <div class="form-group mt-4">
-								<div class="w-100 text-center">
-									<p class="mb-1">Avez vous un compte?<a href="{{URL::to('/client_login')}}">Connectez-vous</a></p>
-									<p><a href="#">Forgot Password</a></p>
-								</div>
-	            </div>
-	          </form>
-	        </div>
-				</div>
-			</div>
-		</div>
-	</section>
+                    <span class="login100-form-title p-b-34 p-t-27">
+                        S'inscrire
+                    </span>
 
-	<script src="js/jquery.login.min.js"></script>
-  <script src="js/popper.login.js"></script>
-  <script src="js/bootstrap.login.min.js"></script>
-  <script src="js/main.login.js"></script>
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input class="input100" type="email" name="email" placeholder="Email">
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
 
-	</body>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" type="password" name="password" placeholder="Password">
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" type="submit">
+                            Login
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-90">
+                        <a class="txt1" href="{{URL::to('client_login')}}">
+                            Vous avez deja un compte ? Connectez-vous !
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="frontend/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="frontend/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="frontend/vendor/bootstrap/js/popper.js"></script>
+    <script src="frontend/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="frontend/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="frontend/vendor/daterangepicker/moment.min.js"></script>
+    <script src="frontend/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="frontend/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="frontend/js/main.js"></script>
+
+</body>
+
 </html>
-
