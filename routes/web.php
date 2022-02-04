@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,3 +71,7 @@ Route::get('/deactivate_slider/{id}', 'App\Http\Controllers\SliderController@dea
 
 
 
+
+Auth::routes();
+
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index']);
