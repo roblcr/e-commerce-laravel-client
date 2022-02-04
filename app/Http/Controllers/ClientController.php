@@ -184,6 +184,12 @@ class ClientController extends Controller
 
     }
 
+    public function client_logout()
+    {
+        Session::forget('client');
+        return back();
+    }
+
     public function client_login() {
         return view('client.login');
     }
